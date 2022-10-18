@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HeloController;
+use App\Http\Controllers\SiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,23 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/test', function () {
+    return response()->json([
+        'message' => 'Hello World',
+        'code' => 'INPO MIN',
+        'saya' => [
+            'nama' => 'adit',
+            'umur' => 17,
+            'alamat' => 'Jl. Raya Cibaduyut',
+            'hobi' => 'Coding'
+        ]
+    ], 200);;
+});
+
+Route::resource('/helo', HeloController::class, [
+    'only' => ['index']
+]);
+Route::resource('siswa', SiswaController::class, [
+    'only' => ['index', 'show']
+]);
