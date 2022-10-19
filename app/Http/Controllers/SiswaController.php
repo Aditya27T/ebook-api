@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Siswa;
+use App\Http\Requests\Siswa\StoreRequest;
+use App\Http\Requests\Siswa\UpdateRequest;
+use App\Http\Resources\SiswaResource;
 
 class SiswaController extends Controller
 {
@@ -17,29 +20,22 @@ class SiswaController extends Controller
         $data = Siswa::all();
         return response()->json([
             'message' => 'Success',
-            'data' => $data
+            'data' => SiswaResource::collection($data)
         ], 200); 
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $data = Siswa::create($request->all());
+        return response()->json([
+            'message' => 'Success',
+            'data' => new SiswaResource($data)
+        ], 201);
     }
 
     /**
@@ -50,18 +46,18 @@ class SiswaController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $data = Siswa::findOrFail($id);
+        if ($data) {
+            return response()->json([
+                'message' => 'Success',
+                'data' => $data
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Data not found',
+                'data' => null
+            ], 404);
+        }
     }
 
     /**
@@ -71,9 +67,21 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(updateRequest $request, $id)
     {
-        //
+        $data = Siswa::findOrFail($id);
+        if ($data) {
+            $data->update($request->all());
+            return response()->json([
+                'message' => 'Success',
+                'data' => $data
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Data not found',
+                'data' => null
+            ], 404);
+        }
     }
 
     /**
@@ -84,6 +92,18 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Siswa::findOrFail($id);
+        if ($data) {
+            $data->delete();
+            return response()->json([
+                'message' => 'Success',
+                'data' => new SiswaResource($data)
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Data not found',
+                'data' => null
+            ], 404);
+        }
     }
 }

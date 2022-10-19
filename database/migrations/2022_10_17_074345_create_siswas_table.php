@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('siswas', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->string('name');
             $table->string('gender');
-            $table->integer('umur');
+            $table->integer('age');
             $table->timestamps();
         });
     }

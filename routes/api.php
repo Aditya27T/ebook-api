@@ -36,6 +36,4 @@ Route::get('/test', function () {
 Route::resource('/helo', HeloController::class, [
     'only' => ['index']
 ]);
-Route::resource('siswa', SiswaController::class, [
-    'only' => ['index', 'show']
-]);
+Route::resource('siswa', SiswaController::class);
