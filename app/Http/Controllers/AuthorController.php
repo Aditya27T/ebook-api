@@ -69,9 +69,9 @@ class AuthorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $data = Author::findOrFail($id);
+        $data = Author::find($id);
         if ($data) {
             $data->update($request->all());
             return response()->json([
