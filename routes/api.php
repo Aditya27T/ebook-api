@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HeloController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\AuthorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,5 @@ Route::resource('/helo', HeloController::class, [
     'only' => ['index']
 ]);
 Route::resource('siswa', SiswaController::class);
+
+Route::resource('author', AuthorController::class);
