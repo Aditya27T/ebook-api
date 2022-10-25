@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HeloController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BooksController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +42,5 @@ Route::resource('/helo', HeloController::class, [
 Route::resource('siswa', SiswaController::class);
 
 Route::resource('author', AuthorController::class);
+
+Route::resource('Book', BooksController::class);

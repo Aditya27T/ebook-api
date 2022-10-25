@@ -17,7 +17,7 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $data = Author::all();
+        $data = Author::get();
         return response()->json([
             'message' => 'Success',
             'data' => AuthorResource::collection($data)
