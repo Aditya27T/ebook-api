@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HeloController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BooksController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +39,8 @@ Route::get('/test', function () {
 Route::resource('/helo', HeloController::class, [
     'only' => ['index']
 ]);
-Route::resource('siswa', SiswaController::class, [
-    'only' => ['index', 'show']
-]);
+Route::resource('siswa', SiswaController::class);
+
+Route::resource('author', AuthorController::class);
+
+Route::resource('Book', BooksController::class);

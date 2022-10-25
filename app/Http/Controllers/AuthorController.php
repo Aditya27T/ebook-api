@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Siswa;
-use App\Http\Requests\Siswa\StoreRequest;
-use App\Http\Requests\Siswa\UpdateRequest;
-use App\Http\Resources\SiswaResource;
+use App\Models\Author;
+use App\Http\Resources\AuthorResource;
+use App\Http\Requests\Author\StoreRequest;
+use App\Http\Requests\Author\UpdateRequest;
 
-class SiswaController extends Controller
+class AuthorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,12 +17,13 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        $data = Siswa::all();
+        $data = Author::get();
         return response()->json([
             'message' => 'Success',
-            'data' => SiswaResource::collection($data)
-        ], 200); 
+            'data' => AuthorResource::collection($data)
+        ], 200);
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -31,10 +32,10 @@ class SiswaController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $data = Siswa::create($request->all());
+        $data = Author::create($request->all());
         return response()->json([
             'message' => 'Success',
-            'data' => new SiswaResource($data)
+            'data' => new AuthorResource($data)
         ], 201);
     }
 
@@ -46,7 +47,7 @@ class SiswaController extends Controller
      */
     public function show($id)
     {
-        $data = Siswa::findOrFail($id);
+        $data = Author::findOrFail($id);
         if ($data) {
             return response()->json([
                 'message' => 'Success',
@@ -60,6 +61,7 @@ class SiswaController extends Controller
         }
     }
 
+
     /**
      * Update the specified resource in storage.
      *
@@ -67,9 +69,9 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(updateRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $data = Siswa::findOrFail($id);
+        $data = Author::find($id);
         if ($data) {
             $data->update($request->all());
             return response()->json([
@@ -92,12 +94,12 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {
-        $data = Siswa::findOrFail($id);
+        $data = Author::findOrFail($id);
         if ($data) {
             $data->delete();
             return response()->json([
                 'message' => 'Success',
-                'data' => new SiswaResource($data)
+                'data' => new AuthorResource($data)
             ], 200);
         } else {
             return response()->json([
